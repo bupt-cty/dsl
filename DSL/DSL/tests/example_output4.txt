@@ -1,0 +1,8 @@
+Robot >>> 你好None, 请问有什么可以帮您？
+Robot >>> Waiting user input for 100 seconds
+Robot >>> 请告诉我您想充值的金额
+Robot >>> Waiting user input for 1210 seconds
+Robot >>> 您想充值100元，是吗？
+Robot >>> Waiting user input for 10 seconds
+Robot >>> 充值100元成功，谢谢
+Robot >>> 谢谢您的使用，再见。

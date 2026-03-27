@@ -1,0 +1,65 @@
+# test comment
+
+
+step Main
+	speak "你好, 请问有什么可以帮您？"
+	wait '100'
+	switch $_input_keyword
+		case "复读" call TomNl
+		case "你是谁" call Nl
+		case "身高" call Height
+		case "体重" call Weight
+		case "年龄" call Age
+		case "退出" call Thanks
+		default call Sorry
+	endswitch
+	call Thanks
+endstep
+
+
+step TomNl
+	call Echo '你好，我是一个复读机，请对我说些什么，说"再见"也可以!'
+endstep
+
+step Echo 
+	speak $1
+	wait '100000'
+	switch $_input
+		case "再见" hangup
+		default call Echo $_input
+	endswitch
+	call Main
+endstep
+
+step Nl
+	speak "我是奶龙我是奶龙"
+	call Main
+endstep
+
+step Age
+	speak "我今年3岁了"
+	call Main
+endstep
+
+step Weight
+	speak "我的体重是2吨"
+	call Main
+endstep
+
+step Height
+	speak "我的身高是1.8m"
+	call Main
+endstep
+
+step Sorry
+	call Bye "抱歉，我没有理解您的问题，再见！"
+endstep
+
+step Thanks
+	call Bye "谢谢您的使用，再见。"
+endstep
+
+step Bye
+	speak $1
+	hangup
+endstep

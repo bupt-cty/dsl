@@ -1,0 +1,22 @@
+# working dir of scripts and main interpreter.
+pwd: .
+
+# runtime config
+runtime:
+  # path of user database, will be injected into scripts.
+  user-db: ./data/random-users.py
+
+job:
+  # path: ./jobs/example_weather.job
+
+  path: ./jobs/example.job
+
+  # halts program on job scripts syntax errors.
+  halt-onerror: true
+
+# python scripts dirs
+scripts: 
+  # halts robot on runpy errors or timeouts.
+  halt-onerror: false
+  dirs: 
+    - ./scripts/

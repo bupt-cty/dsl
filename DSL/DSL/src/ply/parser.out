@@ -1,0 +1,738 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> job
+Rule 1     job -> newlines
+Rule 2     job -> newlines stepdecl job
+Rule 3     stepdecl -> STEP ID expressions ENDSTEP
+Rule 4     expressions -> newlines
+Rule 5     expressions -> NEWLINE expression expressions
+Rule 6     expression -> oneline
+Rule 7     expression -> switch
+Rule 8     id -> ID
+Rule 9     oneline -> VAR = terms
+Rule 10    oneline -> SPEAK terms
+Rule 11    oneline -> CALLPY id va_args
+Rule 12    oneline -> BEEP
+Rule 13    oneline -> WAIT terms
+Rule 14    oneline -> CALL id va_args
+Rule 15    oneline -> HANGUP
+Rule 16    switch -> SWITCH VAR switch_body ENDSWITCH
+Rule 17    switch_body -> cases
+Rule 18    switch_body -> cases default
+Rule 19    cases -> newlines
+Rule 20    cases -> NEWLINE case cases
+Rule 21    default -> DEFAULT oneline NEWLINE
+Rule 22    case -> CASE STR oneline
+Rule 23    terms -> term
+Rule 24    terms -> term + terms
+Rule 25    term -> VAR
+Rule 26    term -> STR
+Rule 27    va_args -> empty
+Rule 28    va_args -> term va_args
+Rule 29    empty -> <empty>
+Rule 30    newlines -> NEWLINE
+Rule 31    newlines -> empty
+
+Terminals, with rules where they appear
+
++                    : 24
+=                    : 9
+BEEP                 : 12
+CALL                 : 14
+CALLPY               : 11
+CASE                 : 22
+DEFAULT              : 21
+ENDSTEP              : 3
+ENDSWITCH            : 16
+HANGUP               : 15
+ID                   : 3 8
+NEWLINE              : 5 20 21 30
+SPEAK                : 10
+STEP                 : 3
+STR                  : 22 26
+SWITCH               : 16
+VAR                  : 9 16 25
+WAIT                 : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+case                 : 20
+cases                : 17 18 20
+default              : 18
+empty                : 27 31
+expression           : 5
+expressions          : 3 5
+id                   : 11 14
+job                  : 2 0
+newlines             : 1 2 4 19
+oneline              : 6 21 22
+stepdecl             : 2
+switch               : 7
+switch_body          : 16
+term                 : 23 24 28
+terms                : 9 10 13 24
+va_args              : 11 14 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . job
+    (1) job -> . newlines
+    (2) job -> . newlines stepdecl job
+    (30) newlines -> . NEWLINE
+    (31) newlines -> . empty
+    (29) empty -> .
+
+    NEWLINE         shift and go to state 3
+    STEP            reduce using rule 29 (empty -> .)
+    $end            reduce using rule 29 (empty -> .)
+
+    job                            shift and go to state 1
+    newlines                       shift and go to state 2
+    empty                          shift and go to state 4
+
+state 1
+
+    (0) S' -> job .
+
+
+
+state 2
+
+    (1) job -> newlines .
+    (2) job -> newlines . stepdecl job
+    (3) stepdecl -> . STEP ID expressions ENDSTEP
+
+    $end            reduce using rule 1 (job -> newlines .)
+    STEP            shift and go to state 6
+
+    stepdecl                       shift and go to state 5
+
+state 3
+
+    (30) newlines -> NEWLINE .
+
+    STEP            reduce using rule 30 (newlines -> NEWLINE .)
+    $end            reduce using rule 30 (newlines -> NEWLINE .)
+
+
+state 4
+
+    (31) newlines -> empty .
+
+    STEP            reduce using rule 31 (newlines -> empty .)
+    $end            reduce using rule 31 (newlines -> empty .)
+    ENDSTEP         reduce using rule 31 (newlines -> empty .)
+    DEFAULT         reduce using rule 31 (newlines -> empty .)
+    ENDSWITCH       reduce using rule 31 (newlines -> empty .)
+
+
+state 5
+
+    (2) job -> newlines stepdecl . job
+    (1) job -> . newlines
+    (2) job -> . newlines stepdecl job
+    (30) newlines -> . NEWLINE
+    (31) newlines -> . empty
+    (29) empty -> .
+
+    NEWLINE         shift and go to state 3
+    STEP            reduce using rule 29 (empty -> .)
+    $end            reduce using rule 29 (empty -> .)
+
+    newlines                       shift and go to state 2
+    job                            shift and go to state 7
+    empty                          shift and go to state 4
+
+state 6
+
+    (3) stepdecl -> STEP . ID expressions ENDSTEP
+
+    ID              shift and go to state 8
+
+
+state 7
+
+    (2) job -> newlines stepdecl job .
+
+    $end            reduce using rule 2 (job -> newlines stepdecl job .)
+
+
+state 8
+
+    (3) stepdecl -> STEP ID . expressions ENDSTEP
+    (4) expressions -> . newlines
+    (5) expressions -> . NEWLINE expression expressions
+    (30) newlines -> . NEWLINE
+    (31) newlines -> . empty
+    (29) empty -> .
+
+    NEWLINE         shift and go to state 11
+    ENDSTEP         reduce using rule 29 (empty -> .)
+
+    expressions                    shift and go to state 9
+    newlines                       shift and go to state 10
+    empty                          shift and go to state 4
+
+state 9
+
+    (3) stepdecl -> STEP ID expressions . ENDSTEP
+
+    ENDSTEP         shift and go to state 12
+
+
+state 10
+
+    (4) expressions -> newlines .
+
+    ENDSTEP         reduce using rule 4 (expressions -> newlines .)
+
+
+state 11
+
+    (5) expressions -> NEWLINE . expression expressions
+    (30) newlines -> NEWLINE .
+    (6) expression -> . oneline
+    (7) expression -> . switch
+    (9) oneline -> . VAR = terms
+    (10) oneline -> . SPEAK terms
+    (11) oneline -> . CALLPY id va_args
+    (12) oneline -> . BEEP
+    (13) oneline -> . WAIT terms
+    (14) oneline -> . CALL id va_args
+    (15) oneline -> . HANGUP
+    (16) switch -> . SWITCH VAR switch_body ENDSWITCH
+
+    ENDSTEP         reduce using rule 30 (newlines -> NEWLINE .)
+    VAR             shift and go to state 16
+    SPEAK           shift and go to state 17
+    CALLPY          shift and go to state 18
+    BEEP            shift and go to state 19
+    WAIT            shift and go to state 20
+    CALL            shift and go to state 21
+    HANGUP          shift and go to state 22
+    SWITCH          shift and go to state 23
+
+    expression                     shift and go to state 13
+    oneline                        shift and go to state 14
+    switch                         shift and go to state 15
+
+state 12
+
+    (3) stepdecl -> STEP ID expressions ENDSTEP .
+
+    NEWLINE         reduce using rule 3 (stepdecl -> STEP ID expressions ENDSTEP .)
+    STEP            reduce using rule 3 (stepdecl -> STEP ID expressions ENDSTEP .)
+    $end            reduce using rule 3 (stepdecl -> STEP ID expressions ENDSTEP .)
+
+
+state 13
+
+    (5) expressions -> NEWLINE expression . expressions
+    (4) expressions -> . newlines
+    (5) expressions -> . NEWLINE expression expressions
+    (30) newlines -> . NEWLINE
+    (31) newlines -> . empty
+    (29) empty -> .
+
+    NEWLINE         shift and go to state 11
+    ENDSTEP         reduce using rule 29 (empty -> .)
+
+    expressions                    shift and go to state 24
+    newlines                       shift and go to state 10
+    empty                          shift and go to state 4
+
+state 14
+
+    (6) expression -> oneline .
+
+    NEWLINE         reduce using rule 6 (expression -> oneline .)
+    ENDSTEP         reduce using rule 6 (expression -> oneline .)
+
+
+state 15
+
+    (7) expression -> switch .
+
+    NEWLINE         reduce using rule 7 (expression -> switch .)
+    ENDSTEP         reduce using rule 7 (expression -> switch .)
+
+
+state 16
+
+    (9) oneline -> VAR . = terms
+
+    =               shift and go to state 25
+
+
+state 17
+
+    (10) oneline -> SPEAK . terms
+    (23) terms -> . term
+    (24) terms -> . term + terms
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    terms                          shift and go to state 26
+    term                           shift and go to state 27
+
+state 18
+
+    (11) oneline -> CALLPY . id va_args
+    (8) id -> . ID
+
+    ID              shift and go to state 31
+
+    id                             shift and go to state 30
+
+state 19
+
+    (12) oneline -> BEEP .
+
+    NEWLINE         reduce using rule 12 (oneline -> BEEP .)
+    ENDSTEP         reduce using rule 12 (oneline -> BEEP .)
+    DEFAULT         reduce using rule 12 (oneline -> BEEP .)
+    ENDSWITCH       reduce using rule 12 (oneline -> BEEP .)
+
+
+state 20
+
+    (13) oneline -> WAIT . terms
+    (23) terms -> . term
+    (24) terms -> . term + terms
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    terms                          shift and go to state 32
+    term                           shift and go to state 27
+
+state 21
+
+    (14) oneline -> CALL . id va_args
+    (8) id -> . ID
+
+    ID              shift and go to state 31
+
+    id                             shift and go to state 33
+
+state 22
+
+    (15) oneline -> HANGUP .
+
+    NEWLINE         reduce using rule 15 (oneline -> HANGUP .)
+    ENDSTEP         reduce using rule 15 (oneline -> HANGUP .)
+    DEFAULT         reduce using rule 15 (oneline -> HANGUP .)
+    ENDSWITCH       reduce using rule 15 (oneline -> HANGUP .)
+
+
+state 23
+
+    (16) switch -> SWITCH . VAR switch_body ENDSWITCH
+
+    VAR             shift and go to state 34
+
+
+state 24
+
+    (5) expressions -> NEWLINE expression expressions .
+
+    ENDSTEP         reduce using rule 5 (expressions -> NEWLINE expression expressions .)
+
+
+state 25
+
+    (9) oneline -> VAR = . terms
+    (23) terms -> . term
+    (24) terms -> . term + terms
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    terms                          shift and go to state 35
+    term                           shift and go to state 27
+
+state 26
+
+    (10) oneline -> SPEAK terms .
+
+    NEWLINE         reduce using rule 10 (oneline -> SPEAK terms .)
+    ENDSTEP         reduce using rule 10 (oneline -> SPEAK terms .)
+    DEFAULT         reduce using rule 10 (oneline -> SPEAK terms .)
+    ENDSWITCH       reduce using rule 10 (oneline -> SPEAK terms .)
+
+
+state 27
+
+    (23) terms -> term .
+    (24) terms -> term . + terms
+
+    NEWLINE         reduce using rule 23 (terms -> term .)
+    ENDSTEP         reduce using rule 23 (terms -> term .)
+    DEFAULT         reduce using rule 23 (terms -> term .)
+    ENDSWITCH       reduce using rule 23 (terms -> term .)
+    +               shift and go to state 36
+
+
+state 28
+
+    (25) term -> VAR .
+
+    +               reduce using rule 25 (term -> VAR .)
+    NEWLINE         reduce using rule 25 (term -> VAR .)
+    ENDSTEP         reduce using rule 25 (term -> VAR .)
+    DEFAULT         reduce using rule 25 (term -> VAR .)
+    ENDSWITCH       reduce using rule 25 (term -> VAR .)
+    VAR             reduce using rule 25 (term -> VAR .)
+    STR             reduce using rule 25 (term -> VAR .)
+
+
+state 29
+
+    (26) term -> STR .
+
+    +               reduce using rule 26 (term -> STR .)
+    NEWLINE         reduce using rule 26 (term -> STR .)
+    ENDSTEP         reduce using rule 26 (term -> STR .)
+    DEFAULT         reduce using rule 26 (term -> STR .)
+    ENDSWITCH       reduce using rule 26 (term -> STR .)
+    VAR             reduce using rule 26 (term -> STR .)
+    STR             reduce using rule 26 (term -> STR .)
+
+
+state 30
+
+    (11) oneline -> CALLPY id . va_args
+    (27) va_args -> . empty
+    (28) va_args -> . term va_args
+    (29) empty -> .
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    NEWLINE         reduce using rule 29 (empty -> .)
+    ENDSTEP         reduce using rule 29 (empty -> .)
+    DEFAULT         reduce using rule 29 (empty -> .)
+    ENDSWITCH       reduce using rule 29 (empty -> .)
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    va_args                        shift and go to state 37
+    empty                          shift and go to state 38
+    term                           shift and go to state 39
+
+state 31
+
+    (8) id -> ID .
+
+    VAR             reduce using rule 8 (id -> ID .)
+    STR             reduce using rule 8 (id -> ID .)
+    NEWLINE         reduce using rule 8 (id -> ID .)
+    ENDSTEP         reduce using rule 8 (id -> ID .)
+    DEFAULT         reduce using rule 8 (id -> ID .)
+    ENDSWITCH       reduce using rule 8 (id -> ID .)
+
+
+state 32
+
+    (13) oneline -> WAIT terms .
+
+    NEWLINE         reduce using rule 13 (oneline -> WAIT terms .)
+    ENDSTEP         reduce using rule 13 (oneline -> WAIT terms .)
+    DEFAULT         reduce using rule 13 (oneline -> WAIT terms .)
+    ENDSWITCH       reduce using rule 13 (oneline -> WAIT terms .)
+
+
+state 33
+
+    (14) oneline -> CALL id . va_args
+    (27) va_args -> . empty
+    (28) va_args -> . term va_args
+    (29) empty -> .
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    NEWLINE         reduce using rule 29 (empty -> .)
+    ENDSTEP         reduce using rule 29 (empty -> .)
+    DEFAULT         reduce using rule 29 (empty -> .)
+    ENDSWITCH       reduce using rule 29 (empty -> .)
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    va_args                        shift and go to state 40
+    empty                          shift and go to state 38
+    term                           shift and go to state 39
+
+state 34
+
+    (16) switch -> SWITCH VAR . switch_body ENDSWITCH
+    (17) switch_body -> . cases
+    (18) switch_body -> . cases default
+    (19) cases -> . newlines
+    (20) cases -> . NEWLINE case cases
+    (30) newlines -> . NEWLINE
+    (31) newlines -> . empty
+    (29) empty -> .
+
+    NEWLINE         shift and go to state 44
+    DEFAULT         reduce using rule 29 (empty -> .)
+    ENDSWITCH       reduce using rule 29 (empty -> .)
+
+    switch_body                    shift and go to state 41
+    cases                          shift and go to state 42
+    newlines                       shift and go to state 43
+    empty                          shift and go to state 4
+
+state 35
+
+    (9) oneline -> VAR = terms .
+
+    NEWLINE         reduce using rule 9 (oneline -> VAR = terms .)
+    ENDSTEP         reduce using rule 9 (oneline -> VAR = terms .)
+    DEFAULT         reduce using rule 9 (oneline -> VAR = terms .)
+    ENDSWITCH       reduce using rule 9 (oneline -> VAR = terms .)
+
+
+state 36
+
+    (24) terms -> term + . terms
+    (23) terms -> . term
+    (24) terms -> . term + terms
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    term                           shift and go to state 27
+    terms                          shift and go to state 45
+
+state 37
+
+    (11) oneline -> CALLPY id va_args .
+
+    NEWLINE         reduce using rule 11 (oneline -> CALLPY id va_args .)
+    ENDSTEP         reduce using rule 11 (oneline -> CALLPY id va_args .)
+    DEFAULT         reduce using rule 11 (oneline -> CALLPY id va_args .)
+    ENDSWITCH       reduce using rule 11 (oneline -> CALLPY id va_args .)
+
+
+state 38
+
+    (27) va_args -> empty .
+
+    NEWLINE         reduce using rule 27 (va_args -> empty .)
+    ENDSTEP         reduce using rule 27 (va_args -> empty .)
+    DEFAULT         reduce using rule 27 (va_args -> empty .)
+    ENDSWITCH       reduce using rule 27 (va_args -> empty .)
+
+
+state 39
+
+    (28) va_args -> term . va_args
+    (27) va_args -> . empty
+    (28) va_args -> . term va_args
+    (29) empty -> .
+    (25) term -> . VAR
+    (26) term -> . STR
+
+    NEWLINE         reduce using rule 29 (empty -> .)
+    ENDSTEP         reduce using rule 29 (empty -> .)
+    DEFAULT         reduce using rule 29 (empty -> .)
+    ENDSWITCH       reduce using rule 29 (empty -> .)
+    VAR             shift and go to state 28
+    STR             shift and go to state 29
+
+    term                           shift and go to state 39
+    va_args                        shift and go to state 46
+    empty                          shift and go to state 38
+
+state 40
+
+    (14) oneline -> CALL id va_args .
+
+    NEWLINE         reduce using rule 14 (oneline -> CALL id va_args .)
+    ENDSTEP         reduce using rule 14 (oneline -> CALL id va_args .)
+    DEFAULT         reduce using rule 14 (oneline -> CALL id va_args .)
+    ENDSWITCH       reduce using rule 14 (oneline -> CALL id va_args .)
+
+
+state 41
+
+    (16) switch -> SWITCH VAR switch_body . ENDSWITCH
+
+    ENDSWITCH       shift and go to state 47
+
+
+state 42
+
+    (17) switch_body -> cases .
+    (18) switch_body -> cases . default
+    (21) default -> . DEFAULT oneline NEWLINE
+
+    ENDSWITCH       reduce using rule 17 (switch_body -> cases .)
+    DEFAULT         shift and go to state 49
+
+    default                        shift and go to state 48
+
+state 43
+
+    (19) cases -> newlines .
+
+    DEFAULT         reduce using rule 19 (cases -> newlines .)
+    ENDSWITCH       reduce using rule 19 (cases -> newlines .)
+
+
+state 44
+
+    (20) cases -> NEWLINE . case cases
+    (30) newlines -> NEWLINE .
+    (22) case -> . CASE STR oneline
+
+    DEFAULT         reduce using rule 30 (newlines -> NEWLINE .)
+    ENDSWITCH       reduce using rule 30 (newlines -> NEWLINE .)
+    CASE            shift and go to state 51
+
+    case                           shift and go to state 50
+
+state 45
+
+    (24) terms -> term + terms .
+
+    NEWLINE         reduce using rule 24 (terms -> term + terms .)
+    ENDSTEP         reduce using rule 24 (terms -> term + terms .)
+    DEFAULT         reduce using rule 24 (terms -> term + terms .)
+    ENDSWITCH       reduce using rule 24 (terms -> term + terms .)
+
+
+state 46
+
+    (28) va_args -> term va_args .
+
+    NEWLINE         reduce using rule 28 (va_args -> term va_args .)
+    ENDSTEP         reduce using rule 28 (va_args -> term va_args .)
+    DEFAULT         reduce using rule 28 (va_args -> term va_args .)
+    ENDSWITCH       reduce using rule 28 (va_args -> term va_args .)
+
+
+state 47
+
+    (16) switch -> SWITCH VAR switch_body ENDSWITCH .
+
+    NEWLINE         reduce using rule 16 (switch -> SWITCH VAR switch_body ENDSWITCH .)
+    ENDSTEP         reduce using rule 16 (switch -> SWITCH VAR switch_body ENDSWITCH .)
+
+
+state 48
+
+    (18) switch_body -> cases default .
+
+    ENDSWITCH       reduce using rule 18 (switch_body -> cases default .)
+
+
+state 49
+
+    (21) default -> DEFAULT . oneline NEWLINE
+    (9) oneline -> . VAR = terms
+    (10) oneline -> . SPEAK terms
+    (11) oneline -> . CALLPY id va_args
+    (12) oneline -> . BEEP
+    (13) oneline -> . WAIT terms
+    (14) oneline -> . CALL id va_args
+    (15) oneline -> . HANGUP
+
+    VAR             shift and go to state 16
+    SPEAK           shift and go to state 17
+    CALLPY          shift and go to state 18
+    BEEP            shift and go to state 19
+    WAIT            shift and go to state 20
+    CALL            shift and go to state 21
+    HANGUP          shift and go to state 22
+
+    oneline                        shift and go to state 52
+
+state 50
+
+    (20) cases -> NEWLINE case . cases
+    (19) cases -> . newlines
+    (20) cases -> . NEWLINE case cases
+    (30) newlines -> . NEWLINE
+    (31) newlines -> . empty
+    (29) empty -> .
+
+    NEWLINE         shift and go to state 44
+    DEFAULT         reduce using rule 29 (empty -> .)
+    ENDSWITCH       reduce using rule 29 (empty -> .)
+
+    cases                          shift and go to state 53
+    newlines                       shift and go to state 43
+    empty                          shift and go to state 4
+
+state 51
+
+    (22) case -> CASE . STR oneline
+
+    STR             shift and go to state 54
+
+
+state 52
+
+    (21) default -> DEFAULT oneline . NEWLINE
+
+    NEWLINE         shift and go to state 55
+
+
+state 53
+
+    (20) cases -> NEWLINE case cases .
+
+    DEFAULT         reduce using rule 20 (cases -> NEWLINE case cases .)
+    ENDSWITCH       reduce using rule 20 (cases -> NEWLINE case cases .)
+
+
+state 54
+
+    (22) case -> CASE STR . oneline
+    (9) oneline -> . VAR = terms
+    (10) oneline -> . SPEAK terms
+    (11) oneline -> . CALLPY id va_args
+    (12) oneline -> . BEEP
+    (13) oneline -> . WAIT terms
+    (14) oneline -> . CALL id va_args
+    (15) oneline -> . HANGUP
+
+    VAR             shift and go to state 16
+    SPEAK           shift and go to state 17
+    CALLPY          shift and go to state 18
+    BEEP            shift and go to state 19
+    WAIT            shift and go to state 20
+    CALL            shift and go to state 21
+    HANGUP          shift and go to state 22
+
+    oneline                        shift and go to state 56
+
+state 55
+
+    (21) default -> DEFAULT oneline NEWLINE .
+
+    ENDSWITCH       reduce using rule 21 (default -> DEFAULT oneline NEWLINE .)
+
+
+state 56
+
+    (22) case -> CASE STR oneline .
+
+    NEWLINE         reduce using rule 22 (case -> CASE STR oneline .)
+    DEFAULT         reduce using rule 22 (case -> CASE STR oneline .)
+    ENDSWITCH       reduce using rule 22 (case -> CASE STR oneline .)
+

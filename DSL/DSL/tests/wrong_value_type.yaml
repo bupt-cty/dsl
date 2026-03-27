@@ -1,0 +1,15 @@
+# working dir of scripts and main interpreter.
+pwd: .
+
+# runtime config
+runtime:
+  # path of user database, will be injected into scripts.
+  user-db: ./data/random-users.py
+
+job:
+  path: ./config.yaml
+  halt-onerror: false
+
+# python scripts dirs
+scripts: 
+  dirs: ./scripts/ # should be lists

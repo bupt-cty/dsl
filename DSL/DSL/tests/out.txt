@@ -1,0 +1,6 @@
+Robot >>> 你好None, 请问有什么可以帮您？
+Robot >>> Waiting user input for 100 seconds
+Robot >>> 您好，请在滴声后留下您的宝贵建议
+beep
+Robot >>> Waiting user input for 100 seconds
+Robot >>> 谢谢您的使用，再见。
